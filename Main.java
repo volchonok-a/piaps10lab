@@ -1,0 +1,41 @@
+import java.time.LocalDate;
+
+public class Main {
+    public static void main(String[] args) {
+        University uni = new University();
+
+        Faculty itFaculty = new Faculty("Факультет компьютерных наук");
+        Dean dean = new Dean(12345, "Александр Крыловецкий", "kril@uni.edu");
+        itFaculty.assignDean(dean);
+
+        Institute aiInstitute = new Institute("Институт искусственного интеллекта", "ул. Науки, 1");
+        itFaculty.addDepartment(aiInstitute);
+
+        uni.addFaculty(itFaculty);
+
+        Lecturer lecturer = new Lecturer(67890, "Анастасия Волкова", "volkova@uni.edu", "Машинное обучение");
+        aiInstitute.addResearch(lecturer);
+
+        Course mlCourse = new Course(101, "Machine Learning", 6);
+        Course dlCourse = new Course(102, "Deep Learning", 5);
+
+        lecturer.addCourse(mlCourse);
+        lecturer.addCourse(dlCourse);
+
+        Project aiProject = new Project("AI Research", LocalDate.of(2024, 1, 10), LocalDate.of(2025, 1, 10));
+        lecturer.assignToProject(new Participation(aiProject, 120));
+
+        System.out.println(" Информация о сотрудниках:");
+        System.out.println("Декан:" + dean.getContactInfo());
+        System.out.println("Лектор:" + lecturer.getContactInfo());
+
+        System.out.println("\nКурсы лектора:");
+        lecturer.listCourses();
+
+        System.out.println("\nПроекты лектора:");
+        System.out.println("Общее количество часов по проектам: " + lecturer.getTotalProjectHours());
+
+        System.out.println("\nУниверситет:");
+        System.out.println("Количество факультетов: " + uni.countEmployees());
+    }
+}
